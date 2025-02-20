@@ -10,6 +10,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AirConditionerShop.BLL.Services;
 using AirConditionerShop.DAL.Entities;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AirConditionerShop_HoangNgocTrinh
 {
@@ -74,6 +75,27 @@ namespace AirConditionerShop_HoangNgocTrinh
             }
             //call from Services AirCon
             _service.DeleteAircon(selected);
+
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            //show warning if enter string instead of int (Quantity)
+            int? quantity = null;
+            int tmpQuantity;
+            bool quantityStatus = int.TryParse(QuantityTextBox.Text, out tmpQuantity);
+            if (!quantityStatus && !QuantityTextBox.Text.IsNullOrEmpty())
+            {
+                MessageBox.Show("Incorrect Datatype, please use Integer for quantity!", "Error",MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            } else if (quantityStatus == true) 
+            {
+                quantity = tmpQuantity; //If false, quantity is null
+            }
+            var result = _service.SearchByFeatureAndQuantity(FeatureFunctionTextBox.Text,quantity);
+            AirConsDataGrid.ItemsSource = null; //remove grid
+            AirConsDataGrid.ItemsSource = result;
+
 
         }
     }

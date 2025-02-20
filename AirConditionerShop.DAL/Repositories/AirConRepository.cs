@@ -37,8 +37,8 @@ namespace AirConditionerShop.DAL.Repositories
         public void Delete(AirConditioner x)
         {
             _context = new AirConditionerShop2024DbContext();
-            _context.AirConditioners.Remove(x); //ram
-            _context.SaveChanges(); //table
+            _context.AirConditioners.Remove(x); //delete from RAM
+            _context.SaveChanges(); //delete from table
         }
     }
 }
