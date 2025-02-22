@@ -14,12 +14,15 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace AirConditionerShop_HoangNgocTrinh
 {
+    //GUI <-> Service <-> DAL <-> DBContext
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
         private AirConService _service = new AirConService();
+
+        public StaffMember CurrentAccount { get; set; }
        
         public MainWindow()
         {
@@ -36,6 +39,16 @@ namespace AirConditionerShop_HoangNgocTrinh
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             FillDataGrid();
+            HelloMsgLabel.Content = $"Hi, {CurrentAccount.FullName.ToUpper()} ";
+
+            //Check role for staff's priviledge
+            if (CurrentAccount.Role == 2) //staff
+            {
+                CreateButton.IsEnabled = false;
+                UpdateButton.IsEnabled = false;
+                DeleteButton.IsEnabled = false;
+
+            }
         }
 
         private void FillDataGrid()

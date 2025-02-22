@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using AirConditionerShop.BLL.Services;
 using AirConditionerShop.DAL.Entities;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AirConditionerShop_HoangNgocTrinh
 {
@@ -30,9 +31,23 @@ namespace AirConditionerShop_HoangNgocTrinh
         {
             InitializeComponent();
         }
+        
+        private bool ValidateElement()
+        {
+             //flag, sai o nao do, false
+            if (AirConditionerIdTextBox.Text.IsNullOrEmpty())
+            {
+                MessageBox.Show("The air con name is required","Field require",MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            return true;
+        }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!ValidateElement()) {
+                return;
+            }
             AirConditioner x = new AirConditioner();
             x.AirConditionerId = int.Parse(AirConditionerIdTextBox.Text);
             x.AirConditionerName = AirConditionerNameTextBox.Text;

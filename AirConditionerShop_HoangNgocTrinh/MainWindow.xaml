@@ -40,7 +40,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label Content="© 2024 giáo.làng" HorizontalAlignment="Left" Height="45" Margin="34,605,0,0" VerticalAlignment="Top" Width="182" Foreground="#ffff00"/>
+        <Label Content="© 2025 Demo" HorizontalAlignment="Left" Height="45" Margin="34,605,0,0" VerticalAlignment="Top" Width="182" Foreground="#ffff00"/>
 
     </Grid>
 </Window>
